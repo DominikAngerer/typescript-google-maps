@@ -22,7 +22,7 @@ export class MapController extends Controller {
      * @static
      * @type {string} selector
      */
-    static selector: string = '[data-google-map]';
+    static selector: string = '[data-google-map-component]';
     
     /**
      * Selector for the Google Map Canvas Container
