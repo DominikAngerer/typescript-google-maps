@@ -1,10 +1,21 @@
 import { Controller } from '../lib/Controller';
-import { google } from '../shims/Google';
 import { IFreeGeoIPLocation }  from '../models/IFreeGeoIPLocation';
 
-export class MapController extends Controller {
+import { config } from '../Config';
+import { google } from '../shims/Google';
 
-    static style: any = [{ 'stylers': [{ 'hue': '#ff1a00' }, { 'invert_lightness': true }, { 'saturation': -100 }, { 'lightness': 33 }, { 'gamma': 0.5 }] }, { 'featureType': 'water', 'elementType': 'geometry', 'stylers': [{ 'color': '#2D333C' }] }];    
+import { snazzyMapsStyle } from '../models/SnazzyMaps';
+
+export class MapController extends Controller {
+    
+    /**
+     * Snazzy Maps styles included from the
+     * SnazzyMaps Map
+     * 
+     * @static
+     * @type {*}
+     */
+    static style: any = snazzyMapsStyle;    
 
     /**
      * Google Maps API Key from the
@@ -13,7 +24,7 @@ export class MapController extends Controller {
      * @static
      * @type {string} APIKey
      */
-    static googleMapsApiKey: string = '';
+    static googleMapsApiKey: string = config.google.map.apiKey;
 
     /**
      * Selector for the Controller which contains the
@@ -33,12 +44,13 @@ export class MapController extends Controller {
     static canvas: string = '[data-google-map-canvas]';
     
     /**
-     * Default Location for initialization
+     * Default Location for initialization if no
+     * current Location was found.
      * 
      * @static
      * @type {Object} center
      */
-    static center: Object = { lat: 40.538532, lng: 14.917102 };
+    static center: Object = { lat: 48.2, lng: 16.3667 };
     
     /**
      * Current instance of a Google Maps
@@ -58,16 +70,15 @@ export class MapController extends Controller {
     private currentLocation: IFreeGeoIPLocation;
 
     /**
-     * Splitted Retailer Data from Silhouette API stored
-     * as Google Maps Markers Array.
+     * Google Maps Markers Array.
      */
     private markers: Array<any> = new Array<any>();
 
     
     /**
-     * Creates an instance of RetailerSearchController.
+     * Creates an instance of MapController.
      * 
-     * @param {HTMLElement} element Selected Element from RetailerSearchController.canvas
+     * @param {HTMLElement} element Selected Element from MapController.canvas
      */
     constructor(element: HTMLElement) {
         super(element);
@@ -83,14 +94,21 @@ export class MapController extends Controller {
 		    center: MapController.center,
 		    scrollwheel: false,
             styles: MapController.style,
-		    zoom: 8
+		    zoom: 10
         });
+        
+        // set to current Location according to IP
+        this.initCurrentLocation();
+
+        // initialize markers
         this.initMarkers();
     }  
 
     /**
-     * Get Current Retailers from the Silhouette API
-     * as trigger the setRetailersAsMarkers function
+     * Get Current Markers from Json
+     * 
+     * Test Data generated via: http://beta.json-generator.com/Ny-gnmsGb
+     *
      */
     initMarkers() {
         let xhttp:XMLHttpRequest = new XMLHttpRequest();
@@ -104,7 +122,7 @@ export class MapController extends Controller {
     }
 
     /**
-     * Transforms the current Retailers to google maps markers
+     * Transforms the current MarkerData to google maps markers
      * and saves them in the markes array.
      */
     setMarkersOnMap(markers:Array<any>) {
@@ -119,12 +137,14 @@ export class MapController extends Controller {
             anchor: new google.maps.Point(0, 0)
         };
 
-        for (let i:number = 0, max:number = markers.length; i < max; i++) {
+        for (let i: number = 0, max: number = markers.length; i < max; i++) {
+            let markerData: any = markers[i];
+            debugger;
             let marker: any = new google.maps.Marker({
-                position: new google.maps.LatLng(markers[i].latitude, markers[i].longitude),
+                position: new google.maps.LatLng(markerData.latitude, markerData.longitude),
                 map: this.map,
                 icon: icon,
-                retailerData: markers[i]
+                markerData: markerData
             });
             this.markers.push(marker);
         }

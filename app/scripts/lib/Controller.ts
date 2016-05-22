@@ -108,7 +108,6 @@ export class Controller {
         } else if (!selector) {
             throw new Error('No Selector for Controller found!');
         }
-        console.log(arguments);
         const elements: NodeListOf<Element> = root.querySelectorAll(selector);
         this.beforeInstantiating(elements);
 

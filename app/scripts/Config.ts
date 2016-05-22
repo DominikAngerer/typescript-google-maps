@@ -1,6 +1,10 @@
 // LIVE
 export let config = {
-
+    google: {
+        map: {
+            apiKey: 'AIzaSyDkMIvtXdg8Nuy9lR0HUWxyAD6xlcP7kZ8'
+        }
+    }
 }
 
 // TEST
