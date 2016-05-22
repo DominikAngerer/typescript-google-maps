@@ -1,5 +1,6 @@
 import { Controller } from '../lib/Controller';
 import { IFreeGeoIPLocation }  from '../models/IFreeGeoIPLocation';
+import { IMarker }  from '../models/IMarker';
 
 import { config } from '../Config';
 import { google } from '../shims/Google';
@@ -90,6 +91,8 @@ export class MapController extends Controller {
      * Initialize the current map with default values.
      */
     initMap() {
+        
+        // init Google Maps itself
         this.map = new google.maps.Map(this.$(MapController.canvas)[0], {
 		    center: MapController.center,
 		    scrollwheel: false,
@@ -114,7 +117,8 @@ export class MapController extends Controller {
         let xhttp:XMLHttpRequest = new XMLHttpRequest();
         xhttp.onreadystatechange = () => {
             if (xhttp.readyState == 4 && xhttp.status == 200) {
-                this.setMarkersOnMap(JSON.parse(xhttp.responseText));
+                let markerData: Array<IMarker> = JSON.parse(xhttp.responseText);
+                this.setMarkersOnMap(markerData);
             }
         };
         xhttp.open('GET', '/data/markers.json', true);
@@ -125,7 +129,7 @@ export class MapController extends Controller {
      * Transforms the current MarkerData to google maps markers
      * and saves them in the markes array.
      */
-    setMarkersOnMap(markers:Array<any>) {
+    setMarkersOnMap(markerData:Array<IMarker>) {
         let icon: any = {
             url: '/images/icon.png',
             // This marker is 45 pixels wide by 40 pixels high.
@@ -137,18 +141,24 @@ export class MapController extends Controller {
             anchor: new google.maps.Point(0, 0)
         };
 
-        for (let i: number = 0, max: number = markers.length; i < max; i++) {
-            let markerData: any = markers[i];
+        // iterate over marker data and create a marker
+        // also we will append the current marker data to the
+        // google marker itself - maybe we will need it later
+        for (let i: number = 0, max: number = markerData.length; i < max; i++) {
+            let currentMarkerData: IMarker = markerData[i];
 
             let marker: any = new google.maps.Marker({
-                position: new google.maps.LatLng(markerData.latitude, markerData.longitude),
+                position: new google.maps.LatLng(currentMarkerData.latitude, currentMarkerData.longitude),
                 map: this.map,
                 icon: icon,
                 markerData: markerData
             });
+
+            // add to controllers markers array.
             this.markers.push(marker);
         }
-        
+
+        // Resize Event will be triggered once after markers are set.
         google.maps.event.trigger(this.map, 'resize');
     }  
 
