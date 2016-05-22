@@ -1,0 +1,34 @@
+{
+    "src": {
+        "images": "app/images",
+        "fonts": "app/fonts",
+        "icons": "app/icons",
+        "scss": "app/styles",
+        "js": "app/scripts",
+        "data": "app/data",
+        "templates": "app/templates",
+        "img": "app/images",
+        "bower_components": "bower_components"
+    },
+    "dest": {
+        "css": "dist/styles",
+        "js": "dist/scripts",
+        "templates": "dist",
+        "images": "dist/images",
+        "fonts": "dist/fonts",
+        "data": "dist/data",
+        "docs": "dist/docs"
+    },
+    "browsers": [
+        "ie >= 10",
+        "edge >= 13",
+        "ie_mob >= 10",
+        "ff >= 46",
+        "chrome >= 60",
+        "safari >= 9",
+        "opera >= 35",
+        "ios >= 8",
+        "android >= 4.4",
+        "bb >= 10"
+    ]
+}

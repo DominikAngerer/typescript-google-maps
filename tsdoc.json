@@ -1,0 +1,35 @@
+{
+	"tags":
+	{
+		"allowUnknownTags" : true
+	},
+	"plugins":[
+		 "plugins/markdown"
+		,"/usr/local/lib/node_modules/tsdoc/template/plugins/TSDoc.js"
+	],
+	"opts":
+	{
+		"template"	:"/usr/local/lib/node_modules/tsdoc/template",
+		"recurse"	:"true"
+	},
+	"templates" : {
+		"cleverLinks"     : false,
+		"monospaceLinks"  : false
+	},
+	"source":
+	{
+		"includePattern": "(\\.d)?\\.ts$"
+	},
+	"markdown"  : {
+		"parser"   : "gfm",
+		"hardwrap" : true
+	},
+	"tsdoc":{
+		"tutorials"		:"",
+		"systemName"	: "TypeScript Google Maps",
+		"footer"		: "",
+		"copyright"		: "TypeScript Google Maps Copyright © 2016 dominikangerer.",
+		"outputSourceFiles" : true,
+		"commentsOnly": true
+	}
+}

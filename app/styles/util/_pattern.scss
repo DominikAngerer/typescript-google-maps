@@ -1,0 +1,38 @@
+/**
+* Simple Clearfix
+*/ 
+%clearfix {
+    &:before,
+    &:after {
+        content: " ";
+        display: table;
+    }
+
+    &:after {
+        clear: both;
+    }
+}
+
+/**
+* Reset's Button Stylings for multiple browsers to default.
+*/
+%resetbutton {
+    background: none;
+    border: 0;
+    color: inherit;
+    font: inherit;
+    line-height: normal;
+    overflow: visible;
+    padding: 0;
+    appearance: none; /* for input */
+    -webkit-user-select: none; /* for button */
+        -moz-user-select: none;
+        -ms-user-select: none;
+    box-sizing: content-box;
+    outline:none;
+    border-radius:0;
+    &::-moz-focus-inner {
+        border: 0;
+        padding: 0;
+    }
+}
