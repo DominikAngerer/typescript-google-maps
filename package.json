@@ -25,7 +25,7 @@
     "gulp-iconfont": "^4.0.1",
     "gulp-if": "^1.2.5",
     "gulp-imagemin": "^2.3.0",
-    "gulp-main-bower-files": "^1.2.1",
+    "gulp-main-bower-files": "^1.5.1",
     "gulp-notify": "^2.2.0",
     "gulp-plumber": "^1.0.1",
     "gulp-rename": "^1.2.2",

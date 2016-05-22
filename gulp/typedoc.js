@@ -16,7 +16,7 @@ gulp.task("typedoc", function() {
 			out: config.dest.docs, 
  
 			// TypeDoc options (see typedoc docs) 
-			name: "Energiesparcheck", 
+			name: "Typescript Google Maps", 
 			ignoreCompilerErrors: false,
 			version: true,
 		}))

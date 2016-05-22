@@ -1,11 +1,7 @@
 {
   "name": "typescript-google-maps",
   "version": "0.0.0",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {},
-  "overrides": {
-  },
-  "resolutions": {
-  }
+  "overrides": {}
 }
