@@ -143,7 +143,7 @@ export class MapController extends Controller {
             let marker: any = new google.maps.Marker({
                 position: new google.maps.LatLng(markerData.latitude, markerData.longitude),
                 map: this.map,
-                // icon: icon,
+                icon: icon,
                 markerData: markerData
             });
             this.markers.push(marker);
