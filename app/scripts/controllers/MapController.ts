@@ -107,7 +107,7 @@ export class MapController extends Controller {
     /**
      * Get Current Markers from Json
      * 
-     * Test Data generated via: http://beta.json-generator.com/Ny-gnmsGb
+     * Test Data generated via: http://beta.json-generator.com/Ey5gAmsMW
      *
      */
     initMarkers() {
@@ -139,11 +139,10 @@ export class MapController extends Controller {
 
         for (let i: number = 0, max: number = markers.length; i < max; i++) {
             let markerData: any = markers[i];
-            debugger;
             let marker: any = new google.maps.Marker({
                 position: new google.maps.LatLng(markerData.latitude, markerData.longitude),
                 map: this.map,
-                icon: icon,
+                // icon: icon,
                 markerData: markerData
             });
             this.markers.push(marker);
