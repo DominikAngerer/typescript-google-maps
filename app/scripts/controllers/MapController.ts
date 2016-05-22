@@ -139,7 +139,7 @@ export class MapController extends Controller {
 
         for (let i: number = 0, max: number = markers.length; i < max; i++) {
             let markerData: any = markers[i];
-            debugger;
+
             let marker: any = new google.maps.Marker({
                 position: new google.maps.LatLng(markerData.latitude, markerData.longitude),
                 map: this.map,
