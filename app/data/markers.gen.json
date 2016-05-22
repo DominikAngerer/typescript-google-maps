@@ -1,0 +1,15 @@
+// this was used to generate the markers JSON using
+// the incredible http://beta.json-generator.com/ 
+// check it out.
+
+[
+  {
+    'repeat(5, 100)': {
+      _id: '{{objectId()}}',
+      picture: 'http://placehold.it/32x32',
+      company: '{{company().toUpperCase()}}',
+      latitude: '{{floating(-90.000001, 90)}}',
+      longitude: '{{floating(-180.000001, 180)}}'
+    }
+  }
+]
