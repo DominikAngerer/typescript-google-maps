@@ -94,7 +94,7 @@ export class MapController extends Controller {
 		    center: MapController.center,
 		    scrollwheel: false,
             styles: MapController.style,
-		    zoom: 10
+		    zoom: 5
         });
         
         // set to current Location according to IP
