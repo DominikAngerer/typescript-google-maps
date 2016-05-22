@@ -10,7 +10,7 @@ gulp.task('fonts', function() {
     return gulp.src(config.src.fonts + '/**/*.{eot,svg,ttf,woff}')
         .pipe(gulp.dest(config.dest.fonts))
         .pipe(size({
-            title: "fonts"
+            title: 'fonts'
         }));
 });
 

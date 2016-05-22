@@ -36,7 +36,7 @@ gulp.task('styles', function() {
         .pipe(gulpif(!isProduction, sourcemaps.write()))
         .pipe(gulp.dest(config.dest.css))
         .pipe(size({
-            title: "styles"
+            title: 'styles'
         }));
 });
 

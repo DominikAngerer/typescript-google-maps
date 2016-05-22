@@ -1,4 +1,5 @@
-{
+{   
+    "project": "Typescript Google Maps",
     "src": {
         "images": "app/images",
         "fonts": "app/fonts",

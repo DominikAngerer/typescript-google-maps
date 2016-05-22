@@ -17,7 +17,7 @@ gulp.task('scripts', function() {
         target: 'ES5'
     });
     return b.bundle()
-        .on("error", notify.onError(function (error) {
+        .on('error', notify.onError(function (error) {
             return error.message;
         }))
         .pipe(source('main.js'))

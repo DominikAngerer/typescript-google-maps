@@ -19,7 +19,7 @@ gulp.task('templates', function() {
 
     assemble.data({
         site: {
-            title: 'Blog'
+            title: 'Index'
         }
     });
     assemble.data([config.src.data + '/*.{json,yml}']);

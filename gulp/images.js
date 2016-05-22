@@ -14,7 +14,7 @@ gulp.task('images', function() {
 
         .pipe(gulp.dest(config.dest.images))
         .pipe(size({
-            title: "images"
+            title: 'images'
         }));
 });
 
