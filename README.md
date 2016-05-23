@@ -7,7 +7,7 @@ writing an "base" one and share it with the community.
 
 ## [Running Example](http://ts-google-map.dominikangerer.com/)
 
-[![TS-Google-Map Example (PNG)](http://ts-google-map.dominikangerer.com/github-images/example.png)](http://ts-google-map.dominikangerer.com/)
+[![TS-Google-Map Example (PNG)](http://ts-google-map.dominikangerer.com/github-images/example.png?v=1)](http://ts-google-map.dominikangerer.com/)
 
 ## Getting Started
 
