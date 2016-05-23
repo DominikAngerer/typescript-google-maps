@@ -1,4 +1,4 @@
-import { shim } from '../shims/shim';
+import { shim } from '../shims/Shim';
 
 /**
  * Loads variable from window with the
