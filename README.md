@@ -1,4 +1,4 @@
-# Typescript Google Maps [![Build Status Master](https://travis-ci.org/DominikAngerer/typescript-google-maps.svg?branch=master)](https://travis-ci.org/DominikAngerer/typescript-google-maps) [![Build Status Develop](https://travis-ci.org/DominikAngerer/typescript-google-maps.svg?branch=develop)](https://travis-ci.org/DominikAngerer/typescript-google-maps)
+# Typescript Google Maps [![Build Status Master](https://travis-ci.org/DominikAngerer/typescript-google-maps.svg?branch=master)](https://travis-ci.org/DominikAngerer/typescript-google-maps)
 [![TS-Google-Map Header (PNG)](http://ts-google-map.dominikangerer.com/github-images/header.png?v=1)](http://ts-google-map.dominikangerer.com/)
 
 Wrote a simple Google Maps Component using Typescript and thought about sharing it with the community.
