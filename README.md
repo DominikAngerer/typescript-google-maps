@@ -1,7 +1,7 @@
 # Typescript Google Maps
+[![TS-Google-Map Header (PNG)](http://ts-google-map.dominikangerer.com/github-images/header.png?v=1)](http://ts-google-map.dominikangerer.com/)
 
-Had to write another Google Maps Component and thought about
-writing an "base" one and share it with the community.
+Wrote a simple Google Maps Component using Typescript and thought about sharing it with the community.
 
 ## [Documentation](http://ts-google-map.dominikangerer.com/docs/)
 
