@@ -35,3 +35,26 @@ If you add the `--production` flag all your js, css, html files get minified/ugl
 ```
 gulp build --production
 ```
+
+## How to use
+
+The Google Maps Component is splitted into 2 parts. 1. `data-google-map-component` is the part of the component on which the Controller Instance will be binded at. The 2. `data-google-map-canvas` will be the actual google map. This could than look like:
+
+```
+<div data-google-map-component>
+    <div data-google-map-canvas style="height:90vh">
+    </div>
+</div>
+```
+
+Why split those 2 and not set it directly on one div? If you want to add something like a filter or input you can simply use it in the scope of the `data-google-map-component` without touching the `data-google-map-canvas` at all.
+
+## Features:
+- Default Google Maps 
+- SnazzyMap Support (simply replace your SnazzyMap with the one I configured in the `SnazzyMaps.ts`)
+- Default Center Object
+- Free Geo IP Location (10.000 Request per Hour)
+- New Default Icon `/images/icon.png`
+- New Default Icon as .PSD `/images/icon.psd`
+- No jQuery Needed
+- Generated Test Data from [Json-Generator.com](http://beta.json-generator.com/Ey5gAmsMW)
