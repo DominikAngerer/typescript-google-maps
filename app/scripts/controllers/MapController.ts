@@ -121,7 +121,7 @@ export class MapController extends Controller {
                 this.setMarkersOnMap(markerData);
             }
         };
-        xhttp.open('GET', '/data/markers.json', true);
+        xhttp.open('GET', config.project.paths.markers, true);
         xhttp.send();
     }
 
