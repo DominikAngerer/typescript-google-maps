@@ -4,6 +4,9 @@ export let config = {
         map: {
             apiKey: 'AIzaSyDkMIvtXdg8Nuy9lR0HUWxyAD6xlcP7kZ8'
         }
+    },
+    project: {
+        version: 'FPeSe6S6hfIyXoVqAA74'
     }
 }
 
