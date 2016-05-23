@@ -131,7 +131,7 @@ export class MapController extends Controller {
      */
     setMarkersOnMap(markerData:Array<IMarker>) {
         let icon: any = {
-            url: '/images/icon.png',
+            url: '/images/icon.png?v=1',
             // This marker is 45 pixels wide by 40 pixels high.
             size: new google.maps.Size(45, 40),
             scaledSize: new google.maps.Size(45, 40),
