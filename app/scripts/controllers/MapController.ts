@@ -1,11 +1,13 @@
-import { Controller } from '../lib/Controller';
-import { IFreeGeoIPLocation }  from '../models/IFreeGeoIPLocation';
-import { IMarker }  from '../models/IMarker';
-
 import { config } from '../Config';
-import { google } from '../shims/Google';
+import { Controller } from '../lib/Controller';
+import { template } from '../lib/Template';
 
-import { snazzyMapsStyle } from '../models/SnazzyMaps';
+import { IFreeGeoIPLocation }  from '../models/map/IFreeGeoIPLocation';
+import { IMarkerData }  from '../models/map/IMarkerData';
+import { snazzyMapsStyle } from '../models/map/SnazzyMaps';
+
+import { google } from '../shims/Google';
+import { infoBox } from '../shims/InfoBox';
 
 export class MapController extends Controller {
     
@@ -40,9 +42,17 @@ export class MapController extends Controller {
      * Selector for the Google Map Canvas Container
      * 
      * @static
-     * @type {string} Canvas Class
+     * @type {string} Canvas Selector
      */
     static canvas: string = '[data-google-map-canvas]';
+    
+    /**
+     * Selector for your infobox Template
+     * 
+     * @static
+     * @type {string} Infobox Template Selector
+     */
+    static infoboxTemplate: string = '[data-google-map-infobox-template]';
     
     /**
      * Default Location for initialization if no
@@ -60,6 +70,14 @@ export class MapController extends Controller {
      * @type {*} Google Map
      */
     private map: any;
+    
+    /**
+     * Currently Open Infobox - saved so we can close it.
+     * 
+     * @private
+     * @type {*}
+     */
+    private openInfoBox: any;
     
     /**
      * Location Object from //freegeoip.net/json/
@@ -117,7 +135,7 @@ export class MapController extends Controller {
         let xhttp:XMLHttpRequest = new XMLHttpRequest();
         xhttp.onreadystatechange = () => {
             if (xhttp.readyState == 4 && xhttp.status == 200) {
-                let markerData: Array<IMarker> = JSON.parse(xhttp.responseText);
+                let markerData: Array<IMarkerData> = JSON.parse(xhttp.responseText);
                 this.setMarkersOnMap(markerData);
             }
         };
@@ -129,7 +147,7 @@ export class MapController extends Controller {
      * Transforms the current MarkerData to google maps markers
      * and saves them in the markes array.
      */
-    setMarkersOnMap(markerData:Array<IMarker>) {
+    setMarkersOnMap(markerData:Array<IMarkerData>) {
         let icon: any = {
             url: '/images/icon.png?v=' + config.project.version,
             // This marker is 45 pixels wide by 40 pixels high.
@@ -145,19 +163,36 @@ export class MapController extends Controller {
         // also we will append the current marker data to the
         // google marker itself - maybe we will need it later
         for (let i: number = 0, max: number = markerData.length; i < max; i++) {
-            let currentMarkerData: IMarker = markerData[i];
+            let currentMarkerData: IMarkerData = markerData[i];
+            
+            let currentInfoBox:any = this.getInfoBox(currentMarkerData);
 
             let marker: any = new google.maps.Marker({
                 position: new google.maps.LatLng(currentMarkerData.latitude, currentMarkerData.longitude),
                 map: this.map,
                 icon: icon,
+                infobox: currentInfoBox,
                 markerData: markerData
+            });
+            
+            // add on click handler to the marker itself
+            // so it will open our infobox.
+            marker.addListener('click', () => {
+                if (this.openInfoBox) {
+                    this.openInfoBox.close();
+                    if (this.openInfoBox === marker.infobox) {
+                        this.openInfoBox = null;
+                        return;
+                    }
+                }
+                marker.infobox.open(this.map, marker);
+                this.openInfoBox = marker.infobox;
             });
 
             // add to controllers markers array.
             this.markers.push(marker);
         }
-
+        
         // Resize Event will be triggered once after markers are set.
         google.maps.event.trigger(this.map, 'resize');
     }  
@@ -176,6 +211,33 @@ export class MapController extends Controller {
         };
         xhttp.open('GET', '//freegeoip.net/json/', true);
         xhttp.send();
+    }
+    
+    /**
+     * Generates an InfoBox Element using the InfoBox.JS Library
+     * replacing the placeholder from the <script> tag and retrieves it.
+     * 
+     * @param {IMarkerData} markerData current markerData
+     * @returns Instance of an InfoBox
+     */
+    getInfoBox(markerData: IMarkerData) {
+        let infoBoxTemplate:string = this.$(MapController.infoboxTemplate)[0].innerHTML.trim();
+
+        let infoBoxTemplateData: any = {
+            company: markerData.company,
+            picture: markerData.picture
+        }
+
+        let currentInfoBox: any = new infoBox({
+            content: template(infoBoxTemplate, infoBoxTemplateData),
+            disableAutoPan: false,
+            maxWidth: 'auto',
+            pixelOffset: new google.maps.Size(-102, 40),
+            infoBoxClearance: new google.maps.Size(1, 1),
+            closeBoxURL: '' // removes close button
+        });
+
+        return currentInfoBox;
     }
 
 }

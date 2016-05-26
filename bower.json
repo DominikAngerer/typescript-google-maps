@@ -1,7 +1,9 @@
 {
   "name": "typescript-google-maps",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "google-maps-infobox-windowed": "*"
+  },
   "devDependencies": {},
   "overrides": {}
 }

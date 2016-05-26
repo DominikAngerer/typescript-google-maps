@@ -8,7 +8,7 @@ gulp.task('typedoc', function() {
 		.pipe(typedoc({ 
 			// TypeScript options (see typescript docs) 
 			module: 'commonjs', 
-			target: 'es5',
+			target: 'es6',
 			includeDeclarations: true,
             mode: 'file',
 			
