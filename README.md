@@ -61,7 +61,7 @@ Google Maps has the `google.maps.OverlayView` but to use it in an easier way I'v
 </script>
 ```
 
-The HTML in the script-tag with the `data-google-map-infobox-template` attribtue will be loaded and filled with the data you can pass. Have a look at the updated `MapController.getInfoBox()` where we pass the `IMakerData` which extends now our old `IMarker` with the extra data.
+The HTML in the script-tag with the `data-google-map-infobox-template` attribute will be loaded and filled with the data you can pass. Have a look at the updated `MapController.getInfoBox()` where we pass the `IMakerData` which extends now our old `IMarker` with the extra data.
 
 ## Features:
 - Default Google Maps 
