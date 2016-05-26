@@ -72,6 +72,14 @@ export class MapController extends Controller {
     private map: any;
     
     /**
+     * Currently Open Infobox - saved so we can close it.
+     * 
+     * @private
+     * @type {*}
+     */
+    private openInfoBox: any;
+    
+    /**
      * Location Object from //freegeoip.net/json/
      * will be set in the setCurrentLocation();
      * 
@@ -156,18 +164,35 @@ export class MapController extends Controller {
         // google marker itself - maybe we will need it later
         for (let i: number = 0, max: number = markerData.length; i < max; i++) {
             let currentMarkerData: IMarkerData = markerData[i];
+            
+            let currentInfoBox:any = this.getInfoBox(currentMarkerData);
 
             let marker: any = new google.maps.Marker({
                 position: new google.maps.LatLng(currentMarkerData.latitude, currentMarkerData.longitude),
                 map: this.map,
                 icon: icon,
+                infobox: currentInfoBox,
                 markerData: markerData
+            });
+            
+            // add on click handler to the marker itself
+            // so it will open our infobox.
+            marker.addListener('click', () => {
+                if (this.openInfoBox) {
+                    this.openInfoBox.close();
+                    if (this.openInfoBox === marker.infobox) {
+                        this.openInfoBox = null;
+                        return;
+                    }
+                }
+                marker.infobox.open(this.map, marker);
+                this.openInfoBox = marker.infobox;
             });
 
             // add to controllers markers array.
             this.markers.push(marker);
         }
-
+        
         // Resize Event will be triggered once after markers are set.
         google.maps.event.trigger(this.map, 'resize');
     }  
