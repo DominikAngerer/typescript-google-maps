@@ -7,7 +7,7 @@ Wrote a simple Google Maps Component using Typescript and thought about sharing 
 
 ## [Running Example](http://ts-google-map.dominikangerer.com/)
 
-[![TS-Google-Map Example (PNG)](http://ts-google-map.dominikangerer.com/github-images/example.png?v=1)](http://ts-google-map.dominikangerer.com/)
+[![TS-Google-Map Example (PNG)](http://ts-google-map.dominikangerer.com/github-images/example.png?v=2)](http://ts-google-map.dominikangerer.com/)
 
 ## Getting Started
 
