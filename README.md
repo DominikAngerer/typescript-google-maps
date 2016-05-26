@@ -18,7 +18,7 @@ git clone git@github.com:DominikAngerer/typescript-google-maps.git typescript-go
 
 Now run:
 ```
-npm install
+npm install && bower install
 ```
 
 ## Run the server
@@ -49,6 +49,20 @@ The Google Maps Component is splitted into 2 parts. 1. `data-google-map-componen
 
 Why split those 2 and not set it directly on one div? If you want to add something like a filter or input you can simply use it in the scope of the `data-google-map-component` without touching the `data-google-map-canvas` at all.
 
+## Infobox Support
+
+Google Maps has the `google.maps.OverlayView` but to use it in an easier way I've added the [InfoBox Plugin](https://code.google.com/p/google-maps-utility-library-v3/source/browse/trunk/infobox/src/infobox.js?r=49) as [Bower dependency](https://github.com/DominikAngerer/google-maps-infobox) and as Window Function so we can easily use it as `shim`. The basic usage by now can look like:
+
+```
+<script type="text/template" data-google-map-infobox-template>
+    <div class="infobox">
+        Hello \{{world}}
+    </div>
+</script>
+```
+
+The HTML in the script-tag with the `data-google-map-infobox-template` attribtue will be loaded and filled with the data you can pass. Have a look at the updated `MapController.getInfoBox()` where we pass the `IMakerData` which extends now our old `IMarker` with the extra data.
+
 ## Features:
 - Default Google Maps 
 - SnazzyMap Support (simply replace your SnazzyMap with the one I configured in the `SnazzyMaps.ts`)
@@ -58,3 +72,7 @@ Why split those 2 and not set it directly on one div? If you want to add somethi
 - New Default Icon as .PSD `/images/icon.psd`
 - No jQuery Needed
 - Generated Test Data from [Json-Generator.com](http://beta.json-generator.com/Ey5gAmsMW)
+- InfoBox JS Plugin
+- Infobox Example
+- Template example for InfoBoxes
+- Full bower support
