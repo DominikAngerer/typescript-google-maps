@@ -9,6 +9,20 @@ Wrote a simple Google Maps Component using Typescript and thought about sharing 
 
 [![TS-Google-Map Example (PNG)](http://ts-google-map.dominikangerer.com/github-images/example.png?v=2)](http://ts-google-map.dominikangerer.com/)
 
+## Features:
+- Default Google Maps 
+- SnazzyMap Support (simply replace your SnazzyMap with the one I configured in the `SnazzyMaps.ts`)
+- Default Center Object
+- Free Geo IP Location (10.000 Request per Hour)
+- New Default Icon `/images/icon.png`
+- New Default Icon as .PSD `/images/icon.psd`
+- No jQuery Needed
+- Generated Test Data from [Json-Generator.com](http://beta.json-generator.com/Ey5gAmsMW)
+- InfoBox JS Plugin
+- Infobox Example
+- Template example for InfoBoxes
+- Full bower support
+
 ## Getting Started
 
 To install this project
@@ -62,17 +76,3 @@ Google Maps has the `google.maps.OverlayView` but to use it in an easier way I'v
 ```
 
 The HTML in the script-tag with the `data-google-map-infobox-template` attribute will be loaded and filled with the data you can pass. Have a look at the updated `MapController.getInfoBox()` where we pass the `IMakerData` which extends now our old `IMarker` with the extra data.
-
-## Features:
-- Default Google Maps 
-- SnazzyMap Support (simply replace your SnazzyMap with the one I configured in the `SnazzyMaps.ts`)
-- Default Center Object
-- Free Geo IP Location (10.000 Request per Hour)
-- New Default Icon `/images/icon.png`
-- New Default Icon as .PSD `/images/icon.psd`
-- No jQuery Needed
-- Generated Test Data from [Json-Generator.com](http://beta.json-generator.com/Ey5gAmsMW)
-- InfoBox JS Plugin
-- Infobox Example
-- Template example for InfoBoxes
-- Full bower support
