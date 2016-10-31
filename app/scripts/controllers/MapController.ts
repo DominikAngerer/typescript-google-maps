@@ -176,29 +176,34 @@ export class MapController extends Controller {
         for (let i: number = 0, max: number = markerData.length; i < max; i++) {
             let currentMarkerData: IMarkerData = markerData[i];
             
-            let currentInfoBox:any = this.getInfoBox(currentMarkerData);
-
-            let marker: any = new google.maps.Marker({
+            let markerObject:any = {
                 position: new google.maps.LatLng(currentMarkerData.latitude, currentMarkerData.longitude),
                 icon: icon,
                 map: this.map,
-                infobox: currentInfoBox,
                 markerData: markerData
-            });
+            }
             
-            // add on click handler to the marker itself
-            // so it will open our infobox.
-            marker.addListener('click', () => {
-                if (this.openInfoBox) {
-                    this.openInfoBox.close();
-                    if (this.openInfoBox === marker.infobox) {
-                        this.openInfoBox = null;
-                        return;
+            if (infoBox) {
+                markerObject['infoBox'] = this.getInfoBox(currentMarkerData);
+            }
+
+            let marker: any = new google.maps.Marker(markerObject);
+            
+            if (infoBox) {
+                // add on click handler to the marker itself
+                // so it will open our infobox.
+                marker.addListener('click', () => {
+                    if (this.openInfoBox) {
+                        this.openInfoBox.close();
+                        if (this.openInfoBox === marker.infobox) {
+                            this.openInfoBox = null;
+                            return;
+                        }
                     }
-                }
-                marker.infobox.open(this.map, marker);
-                this.openInfoBox = marker.infobox;
-            });
+                    marker.infobox.open(this.map, marker);
+                    this.openInfoBox = marker.infobox;
+                });
+            }
 
             // add to controllers markers array.
             this.markers.push(marker);
