@@ -184,7 +184,7 @@ export class MapController extends Controller {
             }
             
             if (infoBox) {
-                markerObject['infoBox'] = this.getInfoBox(currentMarkerData);
+                markerObject['infobox'] = this.getInfoBox(currentMarkerData);
             }
 
             let marker: any = new google.maps.Marker(markerObject);
