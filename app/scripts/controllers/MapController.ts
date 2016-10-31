@@ -262,7 +262,9 @@ export class MapController extends Controller {
      * @memberOf MapController
      */
     initMarkerClusterer() {
-        this.markerClusterer = new MarkerClusterer(this.map, this.markers, {imagePath: 'https://googlemaps.github.io/js-marker-clusterer/images/m'});
+        if(MarkerClusterer) {
+            this.markerClusterer = new MarkerClusterer(this.map, this.markers, {imagePath: 'https://googlemaps.github.io/js-marker-clusterer/images/m'});
+        }
     }
 
 }
