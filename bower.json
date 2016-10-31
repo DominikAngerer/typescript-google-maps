@@ -2,7 +2,8 @@
   "name": "typescript-google-maps",
   "version": "0.0.0",
   "dependencies": {
-    "google-maps-infobox-windowed": "*"
+    "google-maps-infobox-windowed": "*",
+    "google-maps-markercluster-windowed": "*"
   },
   "devDependencies": {},
   "overrides": {}
