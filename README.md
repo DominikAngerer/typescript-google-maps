@@ -22,6 +22,8 @@ Wrote a simple Google Maps Component using Typescript and thought about sharing 
 - Infobox Example
 - Template example for InfoBoxes
 - Full bower support
+- MarkerClusterer JS Plugin Support
+- MarkerClusterer Example ([feature/markercluster](https://github.com/DominikAngerer/typescript-google-maps/tree/feature/markercluster))
 
 ## Getting Started
 
