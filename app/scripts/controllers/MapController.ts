@@ -7,6 +7,7 @@ import { IMarkerData }  from '../models/map/IMarkerData';
 import { snazzyMapsStyle } from '../models/map/SnazzyMaps';
 
 import { google } from '../shims/Google';
+import { MarkerClusterer } from '../shims/MarkerClusterer';
 import { infoBox } from '../shims/InfoBox';
 
 export class MapController extends Controller {
@@ -71,6 +72,16 @@ export class MapController extends Controller {
      */
     private map: any;
     
+    
+    /**
+     * Current instance of a MarkerClusterer
+     * 
+     * @private
+     * @type {*}
+     * @memberOf MapController
+     */
+    private markerClusterer: any;
+
     /**
      * Currently Open Infobox - saved so we can close it.
      * 
@@ -165,36 +176,45 @@ export class MapController extends Controller {
         for (let i: number = 0, max: number = markerData.length; i < max; i++) {
             let currentMarkerData: IMarkerData = markerData[i];
             
-            let currentInfoBox:any = this.getInfoBox(currentMarkerData);
-
-            let marker: any = new google.maps.Marker({
+            let markerObject:any = {
                 position: new google.maps.LatLng(currentMarkerData.latitude, currentMarkerData.longitude),
-                map: this.map,
                 icon: icon,
-                infobox: currentInfoBox,
+                map: this.map,
                 markerData: markerData
-            });
+            }
             
-            // add on click handler to the marker itself
-            // so it will open our infobox.
-            marker.addListener('click', () => {
-                if (this.openInfoBox) {
-                    this.openInfoBox.close();
-                    if (this.openInfoBox === marker.infobox) {
-                        this.openInfoBox = null;
-                        return;
+            if (infoBox) {
+                markerObject['infoBox'] = this.getInfoBox(currentMarkerData);
+            }
+
+            let marker: any = new google.maps.Marker(markerObject);
+            
+            if (infoBox) {
+                // add on click handler to the marker itself
+                // so it will open our infobox.
+                marker.addListener('click', () => {
+                    if (this.openInfoBox) {
+                        this.openInfoBox.close();
+                        if (this.openInfoBox === marker.infobox) {
+                            this.openInfoBox = null;
+                            return;
+                        }
                     }
-                }
-                marker.infobox.open(this.map, marker);
-                this.openInfoBox = marker.infobox;
-            });
+                    marker.infobox.open(this.map, marker);
+                    this.openInfoBox = marker.infobox;
+                });
+            }
 
             // add to controllers markers array.
             this.markers.push(marker);
         }
+
+        // initialize MarkerClusterer        
+        this.initMarkerClusterer();
         
         // Resize Event will be triggered once after markers are set.
         google.maps.event.trigger(this.map, 'resize');
+        
     }  
 
     /**
@@ -238,6 +258,18 @@ export class MapController extends Controller {
         });
 
         return currentInfoBox;
+    }
+ 
+    /**
+     * Initialize MarkerClusterer with current Map & Markers
+     * 
+     * 
+     * @memberOf MapController
+     */
+    initMarkerClusterer() {
+        if(MarkerClusterer) {
+            this.markerClusterer = new MarkerClusterer(this.map, this.markers, {imagePath: 'https://googlemaps.github.io/js-marker-clusterer/images/m'});
+        }
     }
 
 }
