@@ -93,7 +93,7 @@ this.markerClusterer = new MarkerClusterer(this.map, this.markers, {imagePath: '
 Our `gulp` will directly generate the `vender.js` according to the `bower.json`. So If you don't need the `Infobox Support` just remove that line of the `bower.json` - same for the `MarkerClusterer Support`. The code in the `MapController` only initialize those features if the dependency was found.
 
 
-### No `Infobox Support`
+#### No `Infobox Support`
 
 ```
 {
@@ -107,7 +107,7 @@ Our `gulp` will directly generate the `vender.js` according to the `bower.json`.
 }
 ```
 
-### No `MarkerClusterer Support`
+#### No `MarkerClusterer Support`
 
 ```
 {
@@ -122,7 +122,7 @@ Our `gulp` will directly generate the `vender.js` according to the `bower.json`.
 
 ```
 
-### No `Infobox Support` && `MarkerClusterer Support`
+#### No `Infobox Support` && `MarkerClusterer Support`
 
 ```
 {
