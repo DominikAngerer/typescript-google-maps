@@ -7,6 +7,7 @@ import { IMarkerData }  from '../models/map/IMarkerData';
 import { snazzyMapsStyle } from '../models/map/SnazzyMaps';
 
 import { google } from '../shims/Google';
+import { MarkerClusterer } from '../shims/MarkerClusterer';
 import { infoBox } from '../shims/InfoBox';
 
 export class MapController extends Controller {
@@ -71,6 +72,16 @@ export class MapController extends Controller {
      */
     private map: any;
     
+    
+    /**
+     * Current instance of a MarkerClusterer
+     * 
+     * @private
+     * @type {*}
+     * @memberOf MapController
+     */
+    private markerClusterer: any;
+
     /**
      * Currently Open Infobox - saved so we can close it.
      * 
@@ -169,8 +180,8 @@ export class MapController extends Controller {
 
             let marker: any = new google.maps.Marker({
                 position: new google.maps.LatLng(currentMarkerData.latitude, currentMarkerData.longitude),
-                map: this.map,
                 icon: icon,
+                map: this.map,
                 infobox: currentInfoBox,
                 markerData: markerData
             });
@@ -192,9 +203,13 @@ export class MapController extends Controller {
             // add to controllers markers array.
             this.markers.push(marker);
         }
+
+        // initialize MarkerClusterer        
+        this.initMarkerClusterer();
         
         // Resize Event will be triggered once after markers are set.
         google.maps.event.trigger(this.map, 'resize');
+        
     }  
 
     /**
@@ -238,6 +253,16 @@ export class MapController extends Controller {
         });
 
         return currentInfoBox;
+    }
+ 
+    /**
+     * Initialize MarkerClusterer with current Map & Markers
+     * 
+     * 
+     * @memberOf MapController
+     */
+    initMarkerClusterer() {
+        this.markerClusterer = new MarkerClusterer(this.map, this.markers, {imagePath: 'https://googlemaps.github.io/js-marker-clusterer/images/m'});
     }
 
 }
