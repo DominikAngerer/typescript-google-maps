@@ -23,7 +23,7 @@ Wrote a simple Google Maps Component using Typescript and thought about sharing 
 - Template example for InfoBoxes
 - Full bower support
 - MarkerClusterer JS Plugin Support
-- MarkerClusterer Example ([feature/markercluster](https://github.com/DominikAngerer/typescript-google-maps/tree/feature/markercluster))
+- MarkerClusterer Example
 
 ## Getting Started
 
@@ -78,10 +78,60 @@ Google Maps has the `google.maps.OverlayView` but to use it in an easier way I'v
 ```
 
 ## MarkerClusterer Support
-Google Maps has the possiblilty to use the [MarkerClusterer Plugin](https://github.com/googlemaps/js-marker-clusterer) to directly use it with this setup I've added it as a [Bower dependency](https://github.com/DominikAngerer/google-maps-markercluster-windowed) and as Window Function so we can easily use it as `shim`. The basic usage for this feature can be found in a seperate branch [feature/markercluster](https://github.com/DominikAngerer/typescript-google-maps/tree/feature/markercluster)
+
+Google Maps has the possiblilty to use the [MarkerClusterer Plugin](https://github.com/googlemaps/js-marker-clusterer) to directly use it with this setup I've added it as a [Bower dependency](https://github.com/DominikAngerer/google-maps-markercluster-windowed) and as Window Function so we can easily use it as `shim`.
 
 The main use is this simple line of code:
 
 ```
 this.markerClusterer = new MarkerClusterer(this.map, this.markers, {imagePath: 'https://googlemaps.github.io/js-marker-clusterer/images/m'});
+```
+
+
+## What should I do if I don't need the `Infobox Support` or the `MarkerClusterer Support`?
+
+Our `gulp` will directly generate the `vender.js` according to the `bower.json`. So If you don't need the `Infobox Support` just remove that line of the `bower.json` - same for the `MarkerClusterer Support`. The code in the `MapController` only initialize those features if the dependency was found.
+
+
+### No `Infobox Support`
+
+```
+{
+  "name": "typescript-google-maps",
+  "version": "0.0.0",
+  "dependencies": {
+    "google-maps-markercluster-windowed": "*"
+  },
+  "devDependencies": {},
+  "overrides": {}
+}
+```
+
+### No `MarkerClusterer Support`
+
+```
+{
+  "name": "typescript-google-maps",
+  "version": "0.0.0",
+  "dependencies": {
+    "google-maps-infobox-windowed": "*"
+  },
+  "devDependencies": {},
+  "overrides": {}
+}
+
+```
+
+### No `Infobox Support` && `MarkerClusterer Support`
+
+```
+{
+  "name": "typescript-google-maps",
+  "version": "0.0.0",
+  "dependencies": {
+  },
+  "devDependencies": {},
+  "overrides": {}
+}
+
 ```
