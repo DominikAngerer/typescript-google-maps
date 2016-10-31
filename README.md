@@ -75,4 +75,11 @@ Google Maps has the `google.maps.OverlayView` but to use it in an easier way I'v
 </script>
 ```
 
-The HTML in the script-tag with the `data-google-map-infobox-template` attribute will be loaded and filled with the data you can pass. Have a look at the updated `MapController.getInfoBox()` where we pass the `IMakerData` which extends now our old `IMarker` with the extra data.
+## MarkerClusterer Support
+Google Maps has the possiblilty to use the [MarkerClusterer Plugin](https://github.com/googlemaps/js-marker-clusterer) to directly use it with this setup I've added it as a [Bower dependency](https://github.com/DominikAngerer/google-maps-markercluster-windowed) and as Window Function so we can easily use it as `shim`. The basic usage for this feature can be found in a seperate branch [feature/markercluster](https://github.com/DominikAngerer/typescript-google-maps/tree/feature/markercluster)
+
+The main use is this simple line of code:
+
+```
+this.markerClusterer = new MarkerClusterer(this.map, this.markers, {imagePath: 'https://googlemaps.github.io/js-marker-clusterer/images/m'});
+```
