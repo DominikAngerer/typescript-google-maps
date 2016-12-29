@@ -5,7 +5,6 @@ var mainBowerFiles = require('gulp-main-bower-files');
 var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
 var config = require('./config');
-var uglify = require('gulp-uglify');
 var gulpif = require('gulp-if');
 var argv = require('yargs').argv;
 var fs = require('fs');
